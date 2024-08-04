@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ProductColor;
+use App\Models\ProductSize;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
-use App\Models\ProductGallery;
+use App\Models\ProductVariant;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+
 class ProductController extends Controller
 {
     /**
@@ -13,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.index");
     }
 
     /**
@@ -21,15 +29,52 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $colors = ProductColor::all();
+        $sizes = ProductSize::all();
+        $categories = Category::all();
+        return view("admin.create", compact('colors', 'sizes', 'categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        list(
+            $dataProduct,
+            $dataProductVariants,
+        ) = $this->handleData($request);
+        $product = Product::create($dataProduct);
+        foreach ($dataProductVariants as $item) {
+            $item += ['product_id' => $product->id];
+            ProductVariant::create($item);
+        }
+        try {
+            DB::transaction(function () use($dataProduct ,$dataProductVariants ) {
+                /** @var Product $product */
+
+            } , 3);
+            return redirect()
+                ->route('admin.product.index')
+                ->with('success', 'Thao tác thành công!');
+        } catch (\Exception $exception) {
+            if (
+                !empty($dataProduct['img_thumbnail'])
+                && Storage::exists($dataProduct['img_thumbnail'])
+            ) {
+
+                Storage::delete($dataProduct['img_thumbnail']);
+            }
+
+            $dataHasImage = $dataProductVariants ;
+            foreach ($dataHasImage as $item) {
+                if (!empty($item['image']) && Storage::exists($item['image'])) {
+                    Storage::delete($item['image']);
+                }
+            }
+
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
     /**
@@ -37,9 +82,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $gallery = ProductGallery::where("product_id", $id)->get();
-        $product = Product::findOrFail($id);
-        return view("product_detail" , compact('product' , "gallery"));
+        //
     }
 
     /**
@@ -48,22 +91,6 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
-    }
-    public function search(Request $request)
-    {
-        $query = $request->input('search-product');
-
-        // Validate the query
-        $request->validate([
-            'search-product' => 'required|min:3',
-        ]);
-
-        // Search for products by name
-        $products = Product::where('name', 'like', '%' . $query . '%')->get();
-
-        $categories =  Category::all();
-        // Return the search results
-        return view('product', compact('categories','products','query'));
     }
 
     /**
@@ -80,5 +107,31 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    private function handleData(StoreProductRequest|UpdateProductRequest $request)
+    {
+        $dataProduct = $request->except(['product_variants']);
+        if (!empty($dataProduct['img_thumbnail'])) {
+            $dataProduct['img_thumbnail'] = Storage::put('products', $dataProduct['img_thumbnail']);
+        }
+
+        $dataProductVariantsTmp = $request->product_variants;
+        $dataProductVariants = [];
+        foreach ($dataProductVariantsTmp as $key => $item) {
+            $tmp = explode('-', $key);
+
+            // current_image xuất hiện khi update
+            // mai confix lại cái này 
+            $image = !empty($item['image'])
+                ? Storage::put('product_variants', $item['image']) : ($item['current_image'] ?? null);
+
+            $dataProductVariants[] = [
+                'product_size_id' => $tmp[0],
+                'product_color_id' => $tmp[1],
+                'quantity' => $item['quantity'],
+                'image' => $image
+            ];
+        }
+        return [$dataProduct, $dataProductVariants];
     }
 }

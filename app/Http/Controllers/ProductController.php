@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
+use App\Models\Category;
 use Illuminate\Http\Request;
-
-class AdminController extends Controller
+use App\Models\Product;
+use App\Models\ProductGallery;
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("admin.index");
+        //
     }
 
     /**
@@ -36,7 +36,8 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view("product_detail" , compact('product' , "gallery"));
     }
 
     /**
@@ -45,6 +46,22 @@ class AdminController extends Controller
     public function edit(string $id)
     {
         //
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('search-product');
+
+        // Validate the query
+        $request->validate([
+            'search-product' => 'required|min:3',
+        ]);
+
+        // Search for products by name
+        $products = Product::where('name', 'like', '%' . $query . '%')->get();
+
+        $categories =  Category::all();
+        // Return the search results
+        return view('product', compact('categories','products','query'));
     }
 
     /**
