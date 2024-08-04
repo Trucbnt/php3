@@ -1,8 +1,8 @@
 <div class="container-menu-desktop trans-03 ">
     <div class="wrap-menu-desktop">
         <nav class="limiter-menu-desktop p-l-45">
-            
-            <!-- Logo desktop -->		
+
+            <!-- Logo desktop -->
             <a href="#" class="logo">
                 <img src="/storage/thame/images/icons/logo-01.png" alt="IMG-LOGO">
             </a>
@@ -11,11 +11,11 @@
             <div class="menu-desktop">
                 <ul class="main-menu">
                     <li>
-                        <a href="{{route("home")}}">Trang chủ</a>
+                        <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
 
                     <li>
-                        <a href="{{route("shop.index")}}">Cửu hàng</a>
+                        <a href="{{ route('shop.index') }}">Cửu hàng</a>
                     </li>
                     <li>
                         <a href="blog.html">Bài viết</a>
@@ -29,7 +29,7 @@
                         <a href="contact.html">Liên hệ</a>
                     </li>
                 </ul>
-            </div>	
+            </div>
 
             <!-- Icon header -->
             <div class="wrap-icon-header flex-w flex-r-m h-full">
@@ -38,19 +38,28 @@
                         <i class="zmdi zmdi-search"></i>
                     </div>
                 </div>
-                    
+
                 <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+                        data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
                 </div>
-                    
-                <div class="flex-c-m h-full p-lr-19">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
-                        <i class="zmdi zmdi-menu"></i>
+                @guest
+                    <div class="flex-c-m h-full p-lr-19">
+                        <a href="{{ route('login') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        </a>
                     </div>
-                </div>
+                @else
+                    <div class="flex-c-m h-full p-lr-19">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                @endguest
+
             </div>
         </nav>
-    </div>	
+    </div>
 </div>

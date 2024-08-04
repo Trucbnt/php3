@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +16,13 @@ use App\Http\Controllers\ShopController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name("home");
 
 Route::resource("products" , ProductController::class);
 Route::resource("shop" , ShopController::class);
 Route::post("products/search", [ProductController::class , "search" ])->name("search");
 
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource("admin" , AdminController::class)->middleware(['auth']);

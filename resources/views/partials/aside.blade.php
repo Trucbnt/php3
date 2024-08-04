@@ -12,38 +12,44 @@
             <ul class="sidebar-link w-full">
                 <li class="p-b-13">
                     <a href="index.html" class="stext-102 cl2 hov-cl1 trans-04">
-                        Home
+                        Thông tin chung
                     </a>
                 </li>
 
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        My Wishlist
+                        Thông tin tài khoản
                     </a>
                 </li>
 
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        My Account
+                        Số địa chỉ
                     </a>
                 </li>
 
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        Track Oder
+                        Đơn hàng
                     </a>
                 </li>
 
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        Refunds
+                       Sản phẩm yêu thích
                     </a>
                 </li>
 
                 <li class="p-b-13">
                     <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        Help & FAQs
+                      Thay đổi mật khẩu
                     </a>
+                </li>
+                <li class="p-b-13">
+                    <form action="{{route("logout")}}" method="post">
+                        @csrf
+                        <button class="border border-0 p-0 stext-102 cl2 hov-cl1 trans-04">Đăng xuất</button>
+                    </form>
                 </li>
             </ul>
 
