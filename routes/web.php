@@ -25,4 +25,4 @@ Route::post("products/search", [ProductController::class , "search" ])->name("se
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource("admin" , AdminController::class)->middleware(['auth']);
+Route::resource("admin" , AdminController::class)->middleware(['auth','isAdmin']);

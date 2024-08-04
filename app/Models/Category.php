@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
     protected $fillable = [
         'name' , 
-        'cover',
+        'image',
         'is_active'
     ];
     protected $casts = [
@@ -18,6 +18,6 @@ class Category extends Model
     ];
     
     public function product(){
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

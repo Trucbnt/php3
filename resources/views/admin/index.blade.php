@@ -20,7 +20,7 @@
                     <h5 class="card-title mb-0">Thông tin dữ liệu Order</h5>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle"
+                    {{-- <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle"
                         style="width:100%">
                         <thead>
                             <tr>
@@ -97,7 +97,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
                 </div>
             </div>
         </div><!--end col-->

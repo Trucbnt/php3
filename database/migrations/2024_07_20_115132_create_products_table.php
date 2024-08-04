@@ -13,16 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('sku')->unique();
+            $table->string('slug')->nullable();
             $table->string('img_thumbnail')->nullable();
             $table->double('price_regular');
             $table->double('price_sale')->nullable();
-            $table->string('description')->nullable();
-            $table->longText('content')->nullable();
-            $table->string('material')->nullable()->comment('chất liệu');
-            $table->text('user_manual')->nullable()->comment('Hướng dẫn sử dụng');
+            $table->string('short_description')->nullable();
+            $table->string('long_description')->nullable();
             $table->unsignedBigInteger('views')->default(0);
             $table->boolean('is_active')->default(true);
             $table->boolean('is_hot_deal')->default(false);

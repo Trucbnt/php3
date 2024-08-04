@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_variants', function (Blueprint $table) {
-            $table->foreignIdFor(App\Models\Product::class)->constrained();
-            $table->foreignIdFor(App\Models\ProductSize::class)->constrained();
-            $table->foreignIdFor(App\Models\ProductColor::class)->constrained();
+            $table->foreignIdFor(App\Models\Product::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(App\Models\ProductSize::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(App\Models\ProductColor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedInteger('quantity')->default(0);
             $table->string('image')->nullable();
             $table->unique(["product_id" , "product_size_id" , "product_color_id"], "prod_var_unique");

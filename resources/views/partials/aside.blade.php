@@ -10,6 +10,13 @@
 
         <div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
             <ul class="sidebar-link w-full">
+                @if(Auth::user()->isAdmin())
+                <li class="p-b-13">
+                    <a href="{{route("admin.index")}}" class="stext-102 cl2 hov-cl1 trans-04">
+                        Quản trị
+                    </a>
+                </li>
+                @endif
                 <li class="p-b-13">
                     <a href="index.html" class="stext-102 cl2 hov-cl1 trans-04">
                         Thông tin chung

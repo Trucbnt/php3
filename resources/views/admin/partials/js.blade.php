@@ -1,23 +1,23 @@
     <!-- JAVASCRIPT -->
-    <script src="{{asset('thame/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('thame/assets/libs/simplebar/simplebar.min.js')}}"></script>
-    <script src="{{asset('thame/assets/libs/node-waves/waves.min.js')}}"></script>
-    <script src="{{asset('thame/assets/libs/feather-icons/feather.min.js')}}"></script>
-    <script src="{{asset('thame/assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{asset('thame/assets/js/plugins.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/simplebar/simplebar.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/node-waves/waves.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/feather-icons/feather.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
+    <script src="{{asset('/storage/admin/js/plugins.js')}}"></script>
 
     <!-- apexcharts -->
-    <script src="{{asset('thame/assets/libs/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/apexcharts/apexcharts.min.js')}}"></script>
 
     <!-- Vector map-->
-    <script src="{{asset('thame/assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
-    <script src="{{asset('thame/assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/jsvectormap/maps/world-merc.js')}}"></script>
 
     <!--Swiper slider js-->
-    <script src="{{asset('thame/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('/storage/admin/libs/swiper/swiper-bundle.min.js')}}"></script>
 
     <!-- Dashboard init -->
-    <script src="{{asset('thame/assets/js/pages/dashboard-ecommerce.init.js')}}"></script>
+    <script src="{{asset('/storage/admin/js/pages/dashboard-ecommerce.init.js')}}"></script>
 
     <!-- App js -->
-    <script src="{{asset('thame/assets/js/app.js')}}"></script>
+    <script src="{{asset('/storage/admin/js/app.js')}}"></script>

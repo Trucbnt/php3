@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-use App\Models\ProductGallery;
 use App\Models\ProductColor;
 use App\Models\ProductSize;
 class Product extends Model
@@ -15,14 +14,11 @@ class Product extends Model
         'catalogue_id' , 
         'name' , 
         'slug' , 
-        'sku' , 
         'img_thumbnail' , 
         'price_regular' , 
         'price_sale' , 
-        'description' , 
-        'content' , 
-        'material' , 
-        'user_manual',
+        'short_description' , 
+        'long_description' , 
         'views',
         'is_active',
         'is_hot_deal',
@@ -38,15 +34,13 @@ class Product extends Model
         "is_show_home" => "boolean"
     ];
     public function categories(){
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
-    public function productGallery(){
-        return $this->hasMany(ProductGallery::class);
-    }
-    public function productColor(){
+
+    public function productColors(){
         return $this->belongsToMany(ProductColor::class);
     }
-    public function productSize(){
+    public function productSizes(){
         return $this->belongsToMany(ProductSize::class);
     }
 }
